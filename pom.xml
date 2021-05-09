@@ -25,7 +25,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
         <maven.compiler.release>15</maven.compiler.release>
-        <exec.mainClass>game.Main</exec.mainClass>
+        <exec.mainClass>boardgame.Main</exec.mainClass>
         <junit.jupiter.version>5.8.0-M1</junit.jupiter.version>
         <checkstyle.version>3.1.2</checkstyle.version>
         <openclover.version>4.4.1</openclover.version>
@@ -206,6 +206,8 @@
     </profiles>
 
     <scm>
-        <developerConnection></developerConnection>
+        <url>https://github.com/HPeti/board-game-project</url>
+        <connection>scm:git:git://github.com/HPeti/board-game-project.git</connection>
+        <developerConnection>scm:git:git@github.com:HPeti/board-game-project.git</developerConnection>
     </scm>
 </project>
