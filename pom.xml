@@ -200,6 +200,6 @@
     <scm>
         <url>https://github.com/HPeti/board-game-project</url>
         <connection>scm:git:https://github.com/HPeti/board-game-project.git</connection>
-        <developerConnection>scm:git:https://github.com/HPeti/board-game-project</developerConnection>
+        <developerConnection>scm:git:https://github.com/HPeti/board-game-project.git</developerConnection>
     </scm>
 </project>
