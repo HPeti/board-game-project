@@ -29,7 +29,7 @@
         <junit.jupiter.version>5.8.0-M1</junit.jupiter.version>
         <checkstyle.version>3.1.2</checkstyle.version>
         <jacoco.version>0.8.6</jacoco.version>
-        <log4j.version>2.14.1</log4j.version>
+        <tinylog.version>2.3.1</tinylog.version>
         <javafx.version>16</javafx.version>
     </properties>
 
@@ -41,16 +41,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>org.tinylog</groupId>
+            <artifactId>tinylog-api</artifactId>
+            <version>${tinylog.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-            <scope>compile</scope>
+            <groupId>org.tinylog</groupId>
+            <artifactId>tinylog-impl</artifactId>
+            <version>${tinylog.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
