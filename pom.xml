@@ -27,7 +27,6 @@
         <maven.compiler.release>16</maven.compiler.release>
         <exec.mainClass>boardgame.Main</exec.mainClass>
         <junit.jupiter.version>5.8.0-M1</junit.jupiter.version>
-        <checkstyle.version>3.1.2</checkstyle.version>
         <jacoco.version>0.8.6</jacoco.version>
         <tinylog.version>2.3.1</tinylog.version>
         <javafx.version>16</javafx.version>
