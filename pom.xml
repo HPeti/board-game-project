@@ -26,7 +26,6 @@
         <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
         <maven.compiler.release>16</maven.compiler.release>
         <exec.mainClass>boardgame.Main</exec.mainClass>
-        <junit.jupiter.version>5.8.0-M1</junit.jupiter.version>
         <jacoco.version>0.8.6</jacoco.version>
         <tinylog.version>2.3.1</tinylog.version>
         <javafx.version>16</javafx.version>
@@ -36,7 +35,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
+            <version>5.8.0-M1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
