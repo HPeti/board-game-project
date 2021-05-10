@@ -54,6 +54,32 @@ public class BoardGameModel {
         return pieces[pieceNumber].positionProperty();
     }
 
+    public boolean isValidMove(int pieceNumber, SimpleDirection direction) {
+        if (pieceNumber < 0 || pieceNumber >= pieces.length) {
+            throw new IllegalArgumentException();
+        }
+        Position newPosition = pieces[pieceNumber].getPosition().moveTo(direction);
+        if (! isOnBoard(newPosition)) {
+            return false;
+        }
+        for (var piece : pieces) {
+            if (piece.getPosition().equals(newPosition)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Set<SimpleDirection> getValidMoves(int pieceNumber) {
+        EnumSet<SimpleDirection> validMoves = EnumSet.noneOf(SimpleDirection.class);
+        for (var direction : SimpleDirection.values()) {
+            if (isValidMove(pieceNumber, direction)) {
+                validMoves.add(direction);
+            }
+        }
+        return validMoves;
+    }
+
     public void move(int pieceNumber, SimpleDirection direction) {
         pieces[pieceNumber].moveTo(direction);
     }
