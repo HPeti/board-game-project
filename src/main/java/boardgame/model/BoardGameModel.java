@@ -1,7 +1,6 @@
 package boardgame.model;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import java.util.*;
@@ -10,7 +9,6 @@ public class BoardGameModel {
 
     public static int BOARD_ROW_SIZE = 5;
     public static int BOARD_COLUMN_SIZE = 4;
-
 
     private final Piece[] pieces;
 
@@ -26,7 +24,6 @@ public class BoardGameModel {
     }
 
     private ReadOnlyObjectWrapper<Player> nextPlayer = new ReadOnlyObjectWrapper<>();
-
 
     public BoardGameModel() {
         this(new Piece(PieceType.BLUE, new Position(0, 0)),
@@ -100,6 +97,7 @@ public class BoardGameModel {
 
     public void move(int pieceNumber, SimpleDirection direction) {
         pieces[pieceNumber].moveTo(direction);
+        nextPlayer.set(nextPlayer.get().alter());
     }
 
     public static boolean isOnBoard(Position position) {
