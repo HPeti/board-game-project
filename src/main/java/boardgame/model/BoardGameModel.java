@@ -1,26 +1,44 @@
 package boardgame.model;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import java.util.*;
 
 public class BoardGameModel {
 
     public static int BOARD_ROW_SIZE = 5;
-    public static int BOARD_COLLUMN_SIZE = 4;
+    public static int BOARD_COLUMN_SIZE = 4;
+
 
     private final Piece[] pieces;
+
+    private enum Player{
+        PLAYER1, PLAYER2;
+
+        public Player alter(){
+            return switch (this){
+                case PLAYER1 -> PLAYER2;
+                case PLAYER2 -> PLAYER1;
+            };
+        }
+    }
+
+    private ReadOnlyObjectWrapper<Player> nextPlayer = new ReadOnlyObjectWrapper<>();
+
 
     public BoardGameModel() {
         this(new Piece(PieceType.BLUE, new Position(0, 0)),
                 new Piece(PieceType.RED, new Position(0, 1)),
                 new Piece(PieceType.BLUE, new Position(0, 2)),
-                new Piece(PieceType.RED, new Position(0, BOARD_COLLUMN_SIZE - 1)),
+                new Piece(PieceType.RED, new Position(0, BOARD_COLUMN_SIZE - 1)),
                 new Piece(PieceType.RED, new Position(BOARD_ROW_SIZE - 1, 0)),
                 new Piece(PieceType.BLUE, new Position(BOARD_ROW_SIZE - 1, 1)),
                 new Piece(PieceType.RED, new Position(BOARD_ROW_SIZE - 1, 2)),
-                new Piece(PieceType.BLUE, new Position(BOARD_ROW_SIZE - 1, BOARD_COLLUMN_SIZE - 1))
-                );
+                new Piece(PieceType.BLUE, new Position(BOARD_ROW_SIZE - 1, BOARD_COLUMN_SIZE - 1))
+        );
+        this.nextPlayer.set(Player.PLAYER1);
     }
 
     public BoardGameModel(Piece... pieces) {
@@ -86,13 +104,19 @@ public class BoardGameModel {
 
     public static boolean isOnBoard(Position position) {
         return 0 <= position.row() && position.row() < BOARD_ROW_SIZE
-                && 0 <= position.col() && position.col() < BOARD_COLLUMN_SIZE;
+                && 0 <= position.col() && position.col() < BOARD_COLUMN_SIZE;
     }
 
     public List<Position> getPiecePositions() {
-        List<Position> positions = new ArrayList<>(pieces.length);
-        for (var piece : pieces) {
-            positions.add(piece.getPosition());
+        List<Position> positions = new ArrayList<>();
+        PieceType searchedType = switch (nextPlayer.get()) {
+            case PLAYER1 -> PieceType.BLUE;
+            case PLAYER2 -> PieceType.RED;
+        };
+        for (int i = 0; i < pieces.length; i++) {
+            if (pieces[i].getType().equals(searchedType))
+                if (getValidMoves(i).size() > 0)
+                    positions.add(pieces[i].getPosition());
         }
         return positions;
     }
