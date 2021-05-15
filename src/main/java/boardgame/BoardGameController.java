@@ -182,5 +182,4 @@ public class BoardGameController {
         newSquare.getChildren().addAll(oldSquare.getChildren());
         oldSquare.getChildren().clear();
     }
-
 }
