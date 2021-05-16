@@ -1,5 +1,6 @@
 package boardgame.model;
 
+import boardgame.player.Player;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
@@ -14,16 +15,6 @@ public class BoardGameModel {
 
     private final Piece[] pieces;
 
-    private enum Player{
-        PLAYER1, PLAYER2;
-
-        public Player alter(){
-            return switch (this){
-                case PLAYER1 -> PLAYER2;
-                case PLAYER2 -> PLAYER1;
-            };
-        }
-    }
 
     private ReadOnlyObjectWrapper<Player> nextPlayer = new ReadOnlyObjectWrapper<>();
     private ReadOnlyBooleanWrapper gameOver = new ReadOnlyBooleanWrapper();
