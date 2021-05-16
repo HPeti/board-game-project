@@ -14,8 +14,12 @@ import java.io.IOException;
 
 public class MainMenuController {
     @FXML
-    private void handleLeaderboard(ActionEvent event) {
-        Logger.debug("Please implement leaderboard...");
+    private void handleLeaderboard(ActionEvent event) throws IOException {
+        Logger.debug("Moving to Leaderboard...");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LeaderBoard.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
     @FXML
     private void handleNewGame(ActionEvent event) throws IOException {
