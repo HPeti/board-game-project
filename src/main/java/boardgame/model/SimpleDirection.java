@@ -33,10 +33,4 @@ public enum SimpleDirection implements Direction {
         }
         throw new IllegalArgumentException();
     }
-
-    public static void main(String[] args) {
-        System.out.println(of(1, 0));
-        Arrays.stream(values()).map(x -> x.colChange).forEach(System.out::println);
-    }
-
 }
