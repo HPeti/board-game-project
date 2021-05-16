@@ -57,7 +57,7 @@ public class BoardGameController {
 
     @FXML
     private void handleReset(ActionEvent event) {
-        Logger.debug("Reset current game");
+        Logger.debug("Resetting current game...");
         selectionPhase = SelectionPhase.SELECT_FROM;
         board.getChildren().clear();
         model = new BoardGameModel();
