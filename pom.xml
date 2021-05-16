@@ -29,6 +29,7 @@
         <jacoco.version>0.8.6</jacoco.version>
         <tinylog.version>2.3.1</tinylog.version>
         <javafx.version>16</javafx.version>
+        <jdbi.version>3.19.0</jdbi.version>
     </properties>
 
     <dependencies>
@@ -66,6 +67,21 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-core</artifactId>
+            <version>${jdbi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-sqlobject</artifactId>
+            <version>${jdbi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
         </dependency>
     </dependencies>
 
