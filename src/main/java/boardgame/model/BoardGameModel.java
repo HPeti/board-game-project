@@ -107,6 +107,10 @@ public class BoardGameModel {
         return gameOver.get();
     }
 
+    public Player getCurrentPlayer(){
+        return nextPlayer.get();
+    }
+
     public boolean getWinCondition(PieceType pieceType){
         for (int i = 0; i < 4; i++) {
             int rowCount = 0;
@@ -129,7 +133,10 @@ public class BoardGameModel {
     public void move(int pieceNumber, SimpleDirection direction) {
         pieces[pieceNumber].moveTo(direction);
         gameOver.set(getWinCondition(PieceType.RED) || getWinCondition(PieceType.BLUE));
-        nextPlayer.set(nextPlayer.get().alter());
+        if (!gameOver.get()){
+            nextPlayer.set(nextPlayer.get().alter());
+        }
+
     }
 
     public static boolean isOnBoard(Position position) {
