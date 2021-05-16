@@ -1,6 +1,8 @@
 package boardgame.model;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import java.util.*;
@@ -24,6 +26,7 @@ public class BoardGameModel {
     }
 
     private ReadOnlyObjectWrapper<Player> nextPlayer = new ReadOnlyObjectWrapper<>();
+    private ReadOnlyBooleanWrapper gameOver = new ReadOnlyBooleanWrapper();
 
     public BoardGameModel() {
         this(new Piece(PieceType.BLUE, new Position(0, 0)),
@@ -36,6 +39,7 @@ public class BoardGameModel {
                 new Piece(PieceType.BLUE, new Position(BOARD_ROW_SIZE - 1, BOARD_COLUMN_SIZE - 1))
         );
         this.nextPlayer.set(Player.PLAYER1);
+        this.gameOver.set(false);
     }
 
     public BoardGameModel(Piece... pieces) {
@@ -95,8 +99,36 @@ public class BoardGameModel {
         return validMoves;
     }
 
+    public ReadOnlyBooleanProperty gameOverProperty(){
+        return gameOver.getReadOnlyProperty();
+    }
+
+    public boolean isGameOver(){
+        return gameOver.get();
+    }
+
+    public boolean getWinCondition(PieceType pieceType){
+        for (int i = 0; i < 4; i++) {
+            int rowCount = 0;
+            int colCount = 0;
+            for(var piece : pieces){
+                if(piece.getType().equals(pieceType)){
+                    if(piece.getPosition().row() == i)
+                        rowCount++;
+                    if(piece.getPosition().col() == i)
+                        colCount++;
+                }
+            }
+            if(rowCount == 3 || colCount == 3){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void move(int pieceNumber, SimpleDirection direction) {
         pieces[pieceNumber].moveTo(direction);
+        gameOver.set(getWinCondition(PieceType.RED) || getWinCondition(PieceType.BLUE));
         nextPlayer.set(nextPlayer.get().alter());
     }
 
