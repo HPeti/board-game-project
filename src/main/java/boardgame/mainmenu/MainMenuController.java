@@ -1,4 +1,4 @@
-package boardgame;
+package boardgame.mainmenu;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

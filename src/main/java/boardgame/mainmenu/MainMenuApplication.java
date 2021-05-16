@@ -1,4 +1,4 @@
-package boardgame;
+package boardgame.mainmenu;
 
 import java.io.IOException;
 import javafx.application.Application;
