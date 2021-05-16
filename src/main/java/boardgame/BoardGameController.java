@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -14,7 +16,6 @@ import javafx.scene.shape.Circle;
 import boardgame.model.BoardGameModel;
 import boardgame.model.SimpleDirection;
 import boardgame.model.Position;
-
 
 import org.tinylog.Logger;
 
@@ -44,12 +45,25 @@ public class BoardGameController {
     private GridPane board;
 
     @FXML
+    private Button resetButton;
+
+    @FXML
     private void initialize() {
         createBoard();
         createPieces();
         setSelectablePositions();
         showSelectablePositions();
     }
+
+    @FXML
+    private void handleReset(ActionEvent event) {
+        Logger.debug("Reset current game");
+        selectionPhase = SelectionPhase.SELECT_FROM;
+        board.getChildren().clear();
+        model = new BoardGameModel();
+        initialize();
+    }
+
 
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
@@ -115,8 +129,14 @@ public class BoardGameController {
     private void alterSelectionPhase() {
         selectionPhase = selectionPhase.alter();
         hideSelectablePositions();
-        setSelectablePositions();
-        showSelectablePositions();
+        if(!model.isGameOver()){
+            setSelectablePositions();
+            showSelectablePositions();
+        }
+        else{
+            Logger.debug("Game is over");
+            Logger.debug("Game won by "+model.getCurrentPlayer());
+        }
     }
 
     private void selectPosition(Position position) {
