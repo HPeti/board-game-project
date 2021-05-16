@@ -3,6 +3,7 @@ package boardgame;
 import java.util.ArrayList;
 import java.util.List;
 
+import boardgame.player.PlayerState;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,7 +67,7 @@ public class BoardGameController {
 
     private void handleGameOver(){
         Logger.debug("Game is over");
-        Logger.debug("Game won by "+model.getCurrentPlayer());
+        Logger.debug("Game won by "+ PlayerState.getNextPlayerName());
     }
 
     private void createBoard() {
