@@ -19,6 +19,7 @@ public class MainMenuController {
     }
     @FXML
     private void handleNewGame(ActionEvent event) throws IOException {
+        Logger.debug("Moving to game controls...");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ui.fxml"));
         stage.setScene(new Scene(root));
