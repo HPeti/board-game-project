@@ -32,12 +32,4 @@ class SimpleDirectionTest {
             SimpleDirection.of(1, 1);
         });
     }
-
-    @Test
-    void values() {
-    }
-
-    @Test
-    void valueOf() {
-    }
 }
