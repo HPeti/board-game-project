@@ -1,5 +1,6 @@
 package boardgame;
 
+import boardgame.mainmenu.MainMenuApplication;
 import javafx.application.Application;
 
 public class Main {
