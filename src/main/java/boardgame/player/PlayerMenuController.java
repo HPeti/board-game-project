@@ -20,23 +20,21 @@ public class PlayerMenuController {
     private TextField player2Field;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         player1Field.setText(System.getProperty("user.name"));
     }
 
-    private void setPlayerNames(){
-        if(player1Field.getText().equals("")){
+    private void setPlayerNames() {
+        if (player1Field.getText().equals("")) {
             Logger.debug("Used default name for Player1");
             PlayerState.setPlayerName(Player.PLAYER1, "DefaultPlayer1Name");
-        }
-        else
+        } else
             PlayerState.setPlayerName(Player.PLAYER1, player1Field.getText());
 
-        if (player2Field.getText().equals("")){
+        if (player2Field.getText().equals("")) {
             Logger.debug("Used default name for Player2");
             PlayerState.setPlayerName(Player.PLAYER2, "DefaultPlayer2Name");
-        }
-        else
+        } else
             PlayerState.setPlayerName(Player.PLAYER2, player2Field.getText());
     }
 
