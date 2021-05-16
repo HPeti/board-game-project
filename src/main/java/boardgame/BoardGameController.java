@@ -64,6 +64,10 @@ public class BoardGameController {
         initialize();
     }
 
+    private void handleGameOver(){
+        Logger.debug("Game is over");
+        Logger.debug("Game won by "+model.getCurrentPlayer());
+    }
 
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
@@ -97,12 +101,14 @@ public class BoardGameController {
 
     @FXML
     private void handleMouseClick(MouseEvent event) {
-        var square = (StackPane) event.getSource();
-        var row = GridPane.getRowIndex(square);
-        var col = GridPane.getColumnIndex(square);
-        var position = new Position(row, col);
-        Logger.debug("Click on square {}", position);
-        handleClickOnSquare(position);
+        if(!model.isGameOver()) {
+            var square = (StackPane) event.getSource();
+            var row = GridPane.getRowIndex(square);
+            var col = GridPane.getColumnIndex(square);
+            var position = new Position(row, col);
+            Logger.debug("Click on square {}", position);
+            handleClickOnSquare(position);
+        }
     }
 
     private void handleClickOnSquare(Position position) {
@@ -134,8 +140,7 @@ public class BoardGameController {
             showSelectablePositions();
         }
         else{
-            Logger.debug("Game is over");
-            Logger.debug("Game won by "+model.getCurrentPlayer());
+            handleGameOver();
         }
     }
 
