@@ -10,8 +10,8 @@ import java.util.*;
 
 public class BoardGameModel {
 
-    public static int BOARD_ROW_SIZE = 5;
-    public static int BOARD_COLUMN_SIZE = 4;
+    private static int BOARD_ROW_SIZE = 5;
+    private static int BOARD_COLUMN_SIZE = 4;
 
     private final Piece[] pieces;
 
@@ -58,6 +58,14 @@ public class BoardGameModel {
 
     public Position getPiecePosition(int pieceNumber) {
         return pieces[pieceNumber].getPosition();
+    }
+
+    public int getBoardRowSize(){
+        return BOARD_ROW_SIZE;
+    }
+
+    public int getBoardColumnSize(){
+        return BOARD_COLUMN_SIZE;
     }
 
     public ObjectProperty<Position> positionProperty(int pieceNumber) {
