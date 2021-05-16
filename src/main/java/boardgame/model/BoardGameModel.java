@@ -1,6 +1,7 @@
 package boardgame.model;
 
 import boardgame.player.Player;
+import boardgame.player.PlayerState;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
@@ -29,7 +30,7 @@ public class BoardGameModel {
                 new Piece(PieceType.RED, new Position(BOARD_ROW_SIZE - 1, 2)),
                 new Piece(PieceType.BLUE, new Position(BOARD_ROW_SIZE - 1, BOARD_COLUMN_SIZE - 1))
         );
-        this.nextPlayer.set(Player.PLAYER1);
+        this.nextPlayer.set(PlayerState.getNextPlayer());
         this.gameOver.set(false);
     }
 
@@ -133,7 +134,8 @@ public class BoardGameModel {
         pieces[pieceNumber].moveTo(direction);
         gameOver.set(getWinCondition(PieceType.RED) || getWinCondition(PieceType.BLUE));
         if (!gameOver.get()){
-            nextPlayer.set(nextPlayer.get().alter());
+            PlayerState.alterNextPlayer();
+            nextPlayer.set(PlayerState.getNextPlayer());
         }
 
     }
