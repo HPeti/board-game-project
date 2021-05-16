@@ -3,9 +3,19 @@ package boardgame.model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+/**
+ * This class is stores information about a {@code Piece}.
+ */
 public class Piece {
 
+    /**
+     * This stores which {@code PieceType} this {@code Piece} represents.
+     */
     private final PieceType type;
+
+    /**
+     * This stores what {@code Position} this {@code Piece} is at.
+     */
     private final ObjectProperty<Position> position = new SimpleObjectProperty<>();
 
     public Piece(PieceType type, Position position) {
@@ -17,19 +27,32 @@ public class Piece {
         return type;
     }
 
+    /**
+     * This function is for getting the {@code Piece}'s {@code Position}.
+     * @return Current {@code Piece}'s {@code Position}.
+     */
     public Position getPosition() {
         return position.get();
     }
 
+    /**
+     * This method moves the {@code Piece}'s {@code Position} in the given {@code Direction}
+     * @param direction
+     */
     public void moveTo(Direction direction) {
         Position newPosition = position.get().moveTo(direction);
         position.set(newPosition);
     }
 
+
     public ObjectProperty<Position> positionProperty() {
         return position;
     }
 
+    /**
+     * Returns the current {@code Piece}'s 
+     * @return
+     */
     public String toString() {
         return type.toString() + position.get().toString();
     }
