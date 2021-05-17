@@ -3,6 +3,7 @@ package boardgame;
 import java.util.ArrayList;
 import java.util.List;
 
+import boardgame.jdbi.LeaderBoardHandler;
 import boardgame.player.PlayerState;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -68,6 +69,8 @@ public class BoardGameController {
     private void handleGameOver(){
         Logger.debug("Game is over");
         Logger.debug("Game won by "+ PlayerState.getNextPlayerName());
+        LeaderBoardHandler.updateWins(PlayerState.getNextPlayerName());
+        LeaderBoardHandler.updateLoses(PlayerState.getOtherPlayerName());
     }
 
     private void createBoard() {
