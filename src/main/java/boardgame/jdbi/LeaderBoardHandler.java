@@ -12,12 +12,12 @@ import java.util.ArrayList;
  */
 public class LeaderBoardHandler {
     /**
-     * This field is used to store the JDBI's state
+     * This field is used to store the JDBI's state.
      */
     private static Jdbi jdbi;
 
     /**
-     * Default constructor for {@code LeaderBoardHandler} class
+     * Default constructor for {@code LeaderBoardHandler} class.
      * It initializes a connection, and tries to create a table to store data.
      */
     public LeaderBoardHandler() {

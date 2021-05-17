@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class PlayerInfo {
     /**
-     * Stores info about Player's name
+     * Stores info about Player's name.
      */
     private String name;
     /**

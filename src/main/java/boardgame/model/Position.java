@@ -3,6 +3,8 @@ package boardgame.model;
 /**
  * This record stores the row and column number of a Position.
  * It also contains a moveTo() and a toString() method.
+ * @param row new {@code Position}'s row.
+ * @param col new {@code Position}'s column.
  */
 public record Position(int row, int col) {
 
