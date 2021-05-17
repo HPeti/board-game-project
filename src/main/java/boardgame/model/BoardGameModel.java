@@ -30,6 +30,7 @@ public class BoardGameModel {
                 new Piece(PieceType.RED, new Position(BOARD_ROW_SIZE - 1, 2)),
                 new Piece(PieceType.BLUE, new Position(BOARD_ROW_SIZE - 1, BOARD_COLUMN_SIZE - 1))
         );
+        PlayerState.init();
         this.nextPlayer.set(PlayerState.getNextPlayer());
         this.gameOver.set(false);
     }
