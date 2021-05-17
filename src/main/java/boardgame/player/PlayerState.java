@@ -6,6 +6,10 @@ public class PlayerState {
 
     private static Player nextPlayer = Player.PLAYER1;
 
+    public static void init(){
+        nextPlayer = Player.PLAYER1;
+    }
+
     public static void setPlayerName(Player playerNumber, String name) {
         switch (playerNumber) {
             case PLAYER1 -> player1Name = name;
