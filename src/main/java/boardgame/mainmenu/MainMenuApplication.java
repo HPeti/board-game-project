@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package boardgame.mainmenu;
 
 import java.io.IOException;
