@@ -25,7 +25,8 @@ public class LeaderBoardController {
 
         int counter = 1;
         for (var playerInfo : playerInfos){
-            Text row = new Text(counter + ".\tName: "+ playerInfo.getName() + ".\tWins: "+ playerInfo.getWinCount() + ".\tLoses: " + playerInfo.getLoseCount());
+            Logger.debug(playerInfo);
+            Text row = new Text(counter + ".\t"+ playerInfo.getName() + ".\tWins: "+ playerInfo.getWinCount() + "\tLoses: " + playerInfo.getLoseCount() + "\n");
             leaderBoardTextFlow.getChildren().add(row);
             counter++;
         }
