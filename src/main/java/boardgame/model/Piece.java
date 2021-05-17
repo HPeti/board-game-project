@@ -23,6 +23,10 @@ public class Piece {
         this.position.set(position);
     }
 
+    /**
+     * Gets the type of the current {@code Piece}.
+     * @return the current {@code Piece}'s {@code PieceType}.
+     */
     public PieceType getType() {
         return type;
     }
@@ -37,7 +41,7 @@ public class Piece {
 
     /**
      * This method moves the {@code Piece}'s {@code Position} in the given {@code Direction}
-     * @param direction
+     * @param direction the given Direction to move to.
      */
     public void moveTo(Direction direction) {
         Position newPosition = position.get().moveTo(direction);
@@ -51,7 +55,7 @@ public class Piece {
 
     /**
      * Returns the current {@code Piece}'s 
-     * @return
+     * @return a string with the {@code PieceType} and {@code Position} info.
      */
     public String toString() {
         return type.toString() + position.get().toString();
