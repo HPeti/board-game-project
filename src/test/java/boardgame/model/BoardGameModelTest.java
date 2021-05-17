@@ -1,5 +1,7 @@
 package boardgame.model;
 
+import boardgame.player.Player;
+import boardgame.player.PlayerState;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +33,7 @@ class BoardGameModelTest {
 
     @Test
     void getPiecePosition() {
+        assertEquals(new Position(0,0), testModel.getPiecePosition(0));
     }
 
     @Test
@@ -43,18 +46,18 @@ class BoardGameModelTest {
 
     @Test
     void gameOverProperty() {
+        assertFalse(testModel.gameOverProperty().get());
     }
 
     @Test
     void isGameOver() {
-    }
-
-    @Test
-    void getCurrentPlayer() {
+        assertFalse(testModel.isGameOver());
     }
 
     @Test
     void getWinCondition() {
+        assertFalse(testModel.getWinCondition(PieceType.BLUE));
+        assertFalse(testModel.getWinCondition(PieceType.RED));
     }
 
     @Test
@@ -63,6 +66,8 @@ class BoardGameModelTest {
 
     @Test
     void isOnBoard() {
+        assertTrue(BoardGameModel.isOnBoard(new Position(0,0)));
+        assertFalse(BoardGameModel.isOnBoard(new Position(-1,-1)));
 
     }
 
