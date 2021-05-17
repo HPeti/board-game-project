@@ -26,6 +26,12 @@ public class PlayerState {
             case PLAYER2 -> player2Name;
         };
     }
+    public static String getOtherPlayerName(){
+        return switch (nextPlayer) {
+            case PLAYER1 -> player2Name;
+            case PLAYER2 -> player1Name;
+        };
+    }
 
     public static Player getNextPlayer() {
         return nextPlayer;
