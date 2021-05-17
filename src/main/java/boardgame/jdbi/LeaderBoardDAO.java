@@ -21,23 +21,23 @@ public interface LeaderBoardDAO {
     @SqlUpdate("insert into LeaderBoard values(:name, 0, 1)")
     void insertLoserPlayer(@Bind("name") String name);
 
-    @SqlUpdate("update LeaderBoard set winCount = winCount + 1 where name == :name ")
+    @SqlUpdate("update LeaderBoard set winCount = winCount + 1 where name = :name ")
     void incrementPlayerWins(@Bind("name") String name);
 
-    @SqlUpdate("update LeaderBoard set loseCount = loseCount + 1 where name == :name ")
+    @SqlUpdate("update LeaderBoard set loseCount = loseCount + 1 where name = :name ")
     void incrementPlayerLoses(@Bind("name") String name);
 
-    @SqlQuery("select winCount from LeaderBoard where name == :name")
+    @SqlQuery("select winCount from LeaderBoard where name = :name")
     int numberOfPlayerWins(@Bind("name") String name);
 
-    @SqlQuery("select loseCount from LeaderBoard where name == :name")
+    @SqlQuery("select loseCount from LeaderBoard where name = :name")
     int numberOfPlayerLoses(@Bind("name") String name);
 
-    @SqlQuery("select name from LeaderBoard order by winCount desc, loseCount ")
+    @SqlQuery("select name, winCount, loseCount from LeaderBoard order by winCount desc, loseCount ")
     PlayerInfo[] getPlayersOrdered();
 
-    @SqlQuery("select exists (select * from LeaderBoard where name = :name")
-    boolean playerExists(@Bind("name")String name);
+    @SqlQuery("select exists (select * from LeaderBoard where name = (:name))")
+    boolean playerExists(@Bind("name") String name);
 
     @SqlUpdate("delete from LeaderBoard")
     void deletePlayerInfos();
