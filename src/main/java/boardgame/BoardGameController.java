@@ -1,5 +1,6 @@
 package boardgame;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,11 @@ import boardgame.player.PlayerState;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -19,6 +25,7 @@ import boardgame.model.BoardGameModel;
 import boardgame.model.SimpleDirection;
 import boardgame.model.Position;
 
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 
 public class BoardGameController {
@@ -35,22 +42,31 @@ public class BoardGameController {
         }
     }
 
-    private SelectionPhase selectionPhase = SelectionPhase.SELECT_FROM;
+    private SelectionPhase selectionPhase;
 
     private List<Position> selectablePositions = new ArrayList<>();
 
     private Position selected;
 
-    private BoardGameModel model = new BoardGameModel();
+    private BoardGameModel model;
 
     @FXML
     private GridPane board;
 
     @FXML
-    private Button resetButton;
+    private Button goToMainMenuButton;
+
+    @FXML
+    private Button goToLeaderBoardButton;
+
+
 
     @FXML
     private void initialize() {
+        goToLeaderBoardButton.setDisable(true);
+        goToMainMenuButton.setDisable(true);
+        model = new BoardGameModel();
+        selectionPhase = SelectionPhase.SELECT_FROM;
         createBoard();
         createPieces();
         setSelectablePositions();
@@ -58,20 +74,58 @@ public class BoardGameController {
     }
 
     @FXML
-    private void handleReset(ActionEvent event) {
+    private void handleGameReset(ActionEvent event) {
         Logger.debug("Resetting current game...");
-        selectionPhase = SelectionPhase.SELECT_FROM;
         board.getChildren().clear();
-        model = new BoardGameModel();
         initialize();
     }
 
+    @FXML
+    private void handleAppReset(ActionEvent event) throws IOException {
+        Logger.debug("Resetting whole application...(going back to main menu too)");
+        board.getChildren().clear();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    private void handleMainMenuButton(ActionEvent event) throws IOException {
+        Logger.info("Going back to main menu after a game...");
+        board.getChildren().clear();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    private void handleLeaderBoardButton(ActionEvent event) throws IOException {
+        board.getChildren().clear();
+        Logger.debug("Moving to Leaderboard...");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LeaderBoard.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     private void handleGameOver(){
-        Logger.debug("Game is over");
-        Logger.debug("Game won by "+ PlayerState.getNextPlayerName());
+        Logger.info("Game is over");
+        alertWinner();
+        goToLeaderBoardButton.setDisable(false);
+        goToMainMenuButton.setDisable(false);
         LeaderBoardHandler.updateWins(PlayerState.getNextPlayerName());
         LeaderBoardHandler.updateLoses(PlayerState.getOtherPlayerName());
     }
+    private void alertWinner(){
+        Logger.info("Game won by "+ PlayerState.getNextPlayerName());
+        Alert gameOverAlert = new Alert(Alert.AlertType.INFORMATION);
+        gameOverAlert.setHeaderText("Game over!");
+        gameOverAlert.setContentText("Game won by "+ PlayerState.getNextPlayerName() +"!");
+        gameOverAlert.showAndWait();
+    }
+
 
     private void createBoard() {
         for (int i = 0; i < board.getRowCount(); i++) {
