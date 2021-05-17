@@ -34,7 +34,7 @@ public class LeaderBoardHandler {
     public static void updateLoses(String name){
         boolean playerExists = jdbi.withExtension(LeaderBoardDAO.class, dao -> dao.playerExists(name));
         if (playerExists){
-            jdbi.withExtension(LeaderBoardDAO.class, dao ->{ dao.insertLoserPlayer(name); return true;});
+            jdbi.withExtension(LeaderBoardDAO.class, dao ->{ dao.incrementPlayerLoses(name); return true;});
         }
         else {
             jdbi.withExtension(LeaderBoardDAO.class, dao ->{ dao.insertLoserPlayer(name);return true;});
